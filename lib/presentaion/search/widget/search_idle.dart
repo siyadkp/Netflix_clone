@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_ui/core/constant.dart';
 import 'package:netflix_ui/presentaion/search/search.dart';
-import 'package:netflix_ui/presentaion/search/widget/Searh_Result.dart';
 
 class SerchBarWidget extends StatelessWidget {
   const SerchBarWidget({super.key});
@@ -28,9 +27,9 @@ class SerchBarWidget extends StatelessWidget {
               style: const TextStyle(color: Colors.white),
             ),
             kHeight,
-            Expanded(
-                child: // ScreenSearch()
-                    ScreenSearch()),
+            const Expanded(child: ScreenSearch()
+                // ScreenSearch()
+                ),
           ],
         ),
       )),

@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_ui/api/api_uri.dart';
+import 'package:netflix_ui/api_models/model/pages.dart';
 import 'package:netflix_ui/core/colors/colors.dart';
 
 class VideoWidget extends StatelessWidget {
   const VideoWidget({
     super.key,
+    required this.index,
+    required this.data,
   });
+
+  final int index;
+  final Pages? data;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class VideoWidget extends StatelessWidget {
           width: double.infinity,
           height: 200,
           child: Image.network(
-            "https://image.tmdb.org/t/p/original/wigZBAmNrIhxp2FNGOROUAeHvdh.jpg",
+            baseUri + data!.results![index].backdropPath!,
             fit: BoxFit.cover,
           ),
         ),
@@ -28,7 +35,7 @@ class VideoWidget extends StatelessWidget {
               onPressed: () {},
               icon: const Icon(
                 Icons.volume_off,
-                color: KwhiteColor,
+                color: kWhiteColor,
                 size: 20,
               ),
             ),

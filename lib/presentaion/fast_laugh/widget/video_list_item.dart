@@ -1,16 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:netflix_ui/core/colors/colors.dart';
+import 'package:video_player/video_player.dart';
 
-class VideoListItem extends StatelessWidget {
-  const VideoListItem({super.key, required this.index});
+class VideoListItem extends StatefulWidget {
+  const VideoListItem({Key? key, required this.index}) : super(key: key);
+
   final int index;
+
+  @override
+  _VideoListItemState createState() => _VideoListItemState();
+}
+
+class _VideoListItemState extends State<VideoListItem> {
+  List<String> video = [
+    'asset/video.mp4',
+    'asset/video1.mp4',
+    'asset/video2.mp4',
+    'asset/video3.mp4',
+    'asset/video4.mp4',
+    'asset/video7.mp4',
+    'asset/video8.mp4'
+  ];
+
+  late VideoPlayerController _videoController;
+  bool _isVideoPlaying = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _videoController = VideoPlayerController.asset(video[widget.index])
+      ..initialize().then((_) {
+        setState(() {});
+      });
+    _videoController.play();
+  }
+
+  @override
+  void dispose() {
+    _videoController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          color: Colors.accents[index % Colors.accents.length],
+        SizedBox(
+          child: AspectRatio(
+            aspectRatio: _videoController.value.aspectRatio,
+            child: VideoPlayer(_videoController),
+          ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -24,10 +62,20 @@ class VideoListItem extends StatelessWidget {
                   radius: 30,
                   backgroundColor: Colors.black.withOpacity(0.5),
                   child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.volume_off,
-                      color: KwhiteColor,
+                    onPressed: () {
+                      setState(() {
+                        if (_isVideoPlaying) {
+                          _videoController.pause();
+                          _isVideoPlaying = false;
+                        } else {
+                          _videoController.play();
+                          _isVideoPlaying = true;
+                        }
+                      });
+                    },
+                    icon: Icon(
+                      _isVideoPlaying ? Icons.pause : Icons.play_arrow,
+                      color: Colors.white,
                       size: 30,
                     ),
                   ),
@@ -40,13 +88,14 @@ class VideoListItem extends StatelessWidget {
                       backgroundImage: NetworkImage(
                           "https://static-koimoi.akamaized.net/wp-content/new-galleries/2015/12/airlift-movie-poster-4.jpg"),
                     ),
-                    videoActions(
+                    VideoActions(
                       icon: Icons.emoji_emotions,
                       title: 'LoL',
                     ),
-                    videoActions(icon: Icons.add, title: 'My List'),
-                    videoActions(icon: Icons.share, title: 'Share'),
-                    videoActions(icon: Icons.play_arrow, title: 'Play'),
+                    VideoActions(icon: Icons.add, title: 'My List'),
+                    VideoActions(icon: Icons.share, title: 'Share'),
+                    VideoActions(
+                        icon: Icons.volume_off_outlined, title: 'Mute'),
                   ],
                 )
               ],
@@ -58,11 +107,11 @@ class VideoListItem extends StatelessWidget {
   }
 }
 
-class videoActions extends StatelessWidget {
+class VideoActions extends StatelessWidget {
   final IconData icon;
   final String title;
 
-  const videoActions({super.key, required this.icon, required this.title});
+  const VideoActions({super.key, required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +126,7 @@ class videoActions extends StatelessWidget {
           ),
           Text(
             title,
-            style: const TextStyle(color: KwhiteColor, fontSize: 15),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           )
         ],
       ),

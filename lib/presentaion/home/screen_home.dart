@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:netflix_ui/core/colors/colors.dart';
 import 'package:netflix_ui/core/constant.dart';
 import 'package:netflix_ui/presentaion/home/widget/number_card.dart';
+import 'package:netflix_ui/presentaion/splash.dart/screen_splash.dart';
 import 'package:netflix_ui/presentaion/widget/title.dart';
 import 'widget/background_card.dart';
 import 'widget/main_title_card.dart';
@@ -32,14 +33,18 @@ class ScreenHome extends StatelessWidget {
           child: Stack(children: [
             ListView(
               children: [
-                BackgroundCard(),
+                const BackgroundCard(),
                 kHeight,
                 MainTitleCard(
                   title: 'Released in the past year',
+                  length: releasedPageData!.results!.length,
+                  data: releasedPageData,
                 ),
                 kHeight,
                 MainTitleCard(
                   title: 'Trending Now',
+                  length: trendingPageData!.results!.length,
+                  data: trendingPageData,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,15 +65,19 @@ class ScreenHome extends StatelessWidget {
                 ),
                 MainTitleCard(
                   title: 'Tense Dramas',
+                  length: tenseDramasPageData!.results!.length,
+                  data: tenseDramasPageData,
                 ),
                 MainTitleCard(
                   title: 'South Indian Cinema',
+                  length: southIndianCinimaPageData!.results!.length,
+                  data: southIndianCinimaPageData,
                 )
               ],
             ),
             scrollNotifier.value == true
                 ? AnimatedContainer(
-                    duration: Duration(microseconds: 1000),
+                    duration: const Duration(microseconds: 1000),
                     width: double.infinity,
                     height: 90,
                     color: Colors.black.withOpacity(0.3),
@@ -92,9 +101,9 @@ class ScreenHome extends StatelessWidget {
                                 child: Container(
                                   width: 30,
                                   height: 30,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     // borderRadius: kRadius10,
-                                    image: const DecorationImage(
+                                    image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
                                           "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117",
@@ -106,7 +115,7 @@ class ScreenHome extends StatelessWidget {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
+                            children: const [
                               Text(
                                 'Tv Showes',
                                 style: TextStyle(
@@ -128,7 +137,7 @@ class ScreenHome extends StatelessWidget {
                       ),
                     ),
                   )
-                : SizedBox()
+                : const SizedBox()
           ]),
         );
       },
@@ -145,16 +154,16 @@ class PlayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: () {},
-      icon: Icon(
+      icon: const Icon(
         Icons.play_arrow,
         size: 30,
       ),
-      label: Text(
+      label: const Text(
         'Play',
         style: TextStyle(fontSize: 20, color: Colors.black),
       ),
       style:
-          ButtonStyle(backgroundColor: MaterialStateProperty.all(KwhiteColor)),
+          ButtonStyle(backgroundColor: MaterialStateProperty.all(kWhiteColor)),
     );
   }
 }

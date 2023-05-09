@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:netflix_ui/core/colors/colors.dart';
-import 'package:netflix_ui/presentaion/fast_laugh/fast_laugh.dart';
-
-import 'presentaion/main_page/widget/screen_main.dart';
+import 'presentaion/splash.dart/screen_splash.dart';
 
 void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            appBarTheme: AppBarTheme(backgroundColor: Colors.black),
+            appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
             primaryColor: Colors.blue,
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue),
             scaffoldBackgroundColor: backgroundColor,
@@ -26,6 +24,6 @@ class MyApp extends StatelessWidget {
                 bodyLarge: TextStyle(color: Colors.white),
                 bodyMedium: TextStyle(color: Colors.white)),
             fontFamily: GoogleFonts.montserrat().fontFamily),
-        home: MainPage());
+        home: const SplashScreen());
   }
 }

@@ -19,7 +19,7 @@ class ScreenSearchResult extends StatelessWidget {
                 crossAxisSpacing: 8,
                 childAspectRatio: 1 / 1.4,
                 children: List.generate(20, (index) {
-                  return SearchResultMainCard();
+                  return const SearchResultMainCard();
                 })))
       ],
     );
@@ -27,7 +27,7 @@ class ScreenSearchResult extends StatelessWidget {
 }
 
 class SearchResultMainCard extends StatelessWidget {
-  SearchResultMainCard({super.key});
+  const SearchResultMainCard({super.key});
   final imageUrl =
       "https://static-koimoi.akamaized.net/wp-content/new-galleries/2015/12/airlift-movie-poster-4.jpg";
   @override

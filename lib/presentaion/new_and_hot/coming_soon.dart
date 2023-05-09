@@ -1,16 +1,47 @@
 import 'package:flutter/material.dart';
+
 import 'package:netflix_ui/core/colors/colors.dart';
 import 'package:netflix_ui/core/constant.dart';
 import 'package:netflix_ui/presentaion/home/widget/costum_button.dart';
+import 'package:netflix_ui/presentaion/splash.dart/screen_splash.dart';
 import 'package:netflix_ui/presentaion/widget/video_widget.dart';
 
-class ComingSoon extends StatelessWidget {
-  const ComingSoon({
+class ComingSoon extends StatefulWidget {
+  ComingSoon({
     super.key,
+    required this.index,
   });
+
+  final int index;
+  List dateList = [];
+
+  @override
+  State<ComingSoon> createState() => _ComingSoonState();
+}
+
+class _ComingSoonState extends State<ComingSoon> {
+  @override
+  void initState() {
+    super.initState();
+    date();
+  }
 
   @override
   Widget build(BuildContext context) {
+    Map<String, String> months = {
+      '01': 'JAN',
+      '02': 'FEB',
+      '03': 'MAR',
+      '04': 'APR',
+      '05': 'MAY',
+      '06': 'JUN',
+      '07': 'JUL',
+      '08': 'AUG',
+      '09': 'SEP',
+      '10': 'OCT',
+      '11': 'NOV',
+      '12': 'DEC'
+    };
     Size size = MediaQuery.of(context).size;
     return Row(
       children: [
@@ -18,14 +49,14 @@ class ComingSoon extends StatelessWidget {
           width: 50,
           height: 450,
           child: Column(
-            children: const [
+            children: [
               Text(
-                'FEB',
-                style: TextStyle(fontSize: 16, color: kGrayColor),
+                months[widget.dateList[0]]!,
+                style: const TextStyle(fontSize: 16, color: kGrayColor),
               ),
               Text(
-                '11',
-                style: TextStyle(
+                widget.dateList[1],
+                style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 4),
@@ -39,18 +70,23 @@ class ComingSoon extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              KHeight20,
-              const VideoWidget(),
+              kHeight20,
+              VideoWidget(index: widget.index, data: comingSoonPageData),
               kHeight30,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'TALLGIRL2',
-                    style: TextStyle(
-                        fontSize: 35,
+                  SizedBox(
+                    width: 240,
+                    height: 30,
+                    child: Text(
+                      comingSoonPageData!.results![widget.index].title!,
+                      style: const TextStyle(
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: -6),
+                        letterSpacing: -3,
+                      ),
+                    ),
                   ),
                   Row(
                     children: const [
@@ -73,20 +109,36 @@ class ComingSoon extends StatelessWidget {
               ),
               const Text('Coming on Friday'),
               kHeight,
-              const Text(
-                'Tall Girl 2',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              SizedBox(
+                height: 20,
+                child: Text(
+                  comingSoonPageData!.results![widget.index].originalTitle!,
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
-              const Text(
-                  'dgfszsdgsdfgsedgsiuyfiouhiuhfiuhsfiuhwiufhiuhwsiufhkjsnbkjfjkbfjkkjsnfjknkjf\nfhfghrtyhesayqaewtyiufygasiyudgyufweg\nljfhiuhsauighh',
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold))
+              SizedBox(
+                width: double.infinity,
+                height: 150,
+                child: Text(
+                    comingSoonPageData!.results![widget.index].overview!,
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold)),
+              )
             ],
           ),
         ),
       ],
     );
+  }
+
+  date() {
+    var data = comingSoonPageData!.results![widget.index].releaseDate!;
+    var index = data.substring(5, 7);
+    var date = data.substring(8, 10);
+    widget.dateList = [index, date];
+    return data;
   }
 }

@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:netflix_ui/api/api_uri.dart';
 import 'package:netflix_ui/core/colors/colors.dart';
 import 'package:netflix_ui/core/constant.dart';
+import 'package:netflix_ui/presentaion/splash.dart/screen_splash.dart';
 import 'package:netflix_ui/presentaion/widget/app_bar_widget.dart';
 
 class ScreenDownload extends StatelessWidget {
@@ -17,16 +19,14 @@ class ScreenDownload extends StatelessWidget {
                 title: 'Downloads',
               )),
           body: ListView(
-            children: const [_smartDownloads(), Section2(), Section3()],
+            children: const [_SmartDownloads(), Section2(), Section3()],
           )),
     );
   }
 }
 
-class _smartDownloads extends StatelessWidget {
-  const _smartDownloads({
-    super.key,
-  });
+class _SmartDownloads extends StatelessWidget {
+  const _SmartDownloads();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _smartDownloads extends StatelessWidget {
         kwidth,
         Icon(
           Icons.settings,
-          color: KwhiteColor,
+          color: kWhiteColor,
         ),
         kwidth,
         Text('Smart Downloads')
@@ -51,9 +51,9 @@ class Section2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final imageList = [
-      "https://image.tmdb.org/t/p/original/wigZBAmNrIhxp2FNGOROUAeHvdh.jpg",
-      "https://static-koimoi.akamaized.net/wp-content/new-galleries/2015/12/airlift-movie-poster-4.jpg",
-      "https://cdn.shopify.com/s/files/1/0969/9128/products/1917_-_Sam_Mendes_-_Hollywood_War_Film_Classic_English_Movie_Poster_a12704bd-2b25-4aa7-8c8d-8f40cf467dc7_large.jpg?v=1582781089"
+      baseUri + downloadsPageData!.results![0].posterPath!,
+      baseUri + downloadsPageData!.results![1].posterPath!,
+      baseUri + downloadsPageData!.results![2].posterPath!,
     ];
     return Column(
       children: [
@@ -63,7 +63,7 @@ class Section2 extends StatelessWidget {
             'Introducing Downloads for you',
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: KwhiteColor, fontSize: 23, fontWeight: FontWeight.bold),
+                color: kWhiteColor, fontSize: 23, fontWeight: FontWeight.bold),
           ),
         ),
         kHeight,
@@ -118,7 +118,7 @@ class Section3 extends StatelessWidget {
           MaterialButton(
             minWidth: 370,
             height: 48,
-            color: ButtblueCorlor,
+            color: buttblueCorlor,
             onPressed: () {},
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -126,22 +126,22 @@ class Section3 extends StatelessWidget {
               'Set up',
               style: TextStyle(
                   fontSize: 20,
-                  color: ButtfontWhiteColor,
+                  color: buttfontWhiteColor,
                   fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           MaterialButton(
             height: 45,
-            color: ButtWhiteColor,
+            color: buttWhiteColor,
             onPressed: () {},
             child: const Text(
               'See what you can download',
               style: TextStyle(
                 fontSize: 20,
-                color: ButtfontBlackColor,
+                color: buttfontBlackColor,
                 fontWeight: FontWeight.bold,
               ),
             ),

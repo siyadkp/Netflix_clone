@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_ui/api/api_uri.dart';
+import 'package:netflix_ui/api_models/model/pages.dart';
 import 'package:netflix_ui/core/constant.dart';
 
 class MainCard extends StatelessWidget {
   const MainCard({
     super.key,
+    required this.index,
+    required this.data,
   });
+
+  final int index;
+  final Pages? data;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +25,7 @@ class MainCard extends StatelessWidget {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://static-koimoi.akamaized.net/wp-content/new-galleries/2015/12/airlift-movie-poster-4.jpg",
+                  baseUri + data!.results![index].posterPath!,
                 )),
           )),
     );

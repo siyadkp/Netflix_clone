@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_ui/core/constant.dart';
 import 'package:netflix_ui/presentaion/new_and_hot/coming_soon.dart';
-import 'package:netflix_ui/presentaion/widget/everyones_watching.dart';
+import 'package:netflix_ui/presentaion/new_and_hot/everyones_watching.dart';
+import 'package:netflix_ui/presentaion/splash.dart/screen_splash.dart';
 
 class ScreenNewAndHot extends StatelessWidget {
   const ScreenNewAndHot({super.key});
@@ -27,9 +28,9 @@ class ScreenNewAndHot extends StatelessWidget {
               child: Container(
                 width: 30,
                 height: 30,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   // borderRadius: kRadius10,
-                  image: const DecorationImage(
+                  image: DecorationImage(
                       fit: BoxFit.cover,
                       image: NetworkImage(
                         "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117",
@@ -71,15 +72,15 @@ class ScreenNewAndHot extends StatelessWidget {
 
   Widget _buildComingSoon() {
     return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, index) => const ComingSoon(),
+      itemCount: comingSoonPageData?.results?.length,
+      itemBuilder: (context, index) => ComingSoon(index: index),
     );
   }
 }
 
 Widget _buildEveryOneseWatching() {
   return ListView.builder(
-    itemCount: 10,
-    itemBuilder: (context, index) => const EveryOneseWatching(),
+    itemCount: everyonesPageData?.results?.length,
+    itemBuilder: (context, index) => EveryOneseWatching(index: index),
   );
 }

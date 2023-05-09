@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_ui/api/api_uri.dart';
 import 'package:netflix_ui/presentaion/home/screen_home.dart';
 import 'package:netflix_ui/presentaion/home/widget/costum_button.dart';
+import 'package:netflix_ui/presentaion/splash.dart/screen_splash.dart';
 
 class BackgroundCard extends StatelessWidget {
   const BackgroundCard({
@@ -18,7 +20,7 @@ class BackgroundCard extends StatelessWidget {
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                      'https://media.harrypotterfanzone.com/philosophers-stone-20-years-of-movie-magic-ron-poster.jpg'))),
+                      baseUri + trendingPageData!.results![8].posterPath!))),
         ),
         Positioned(
           bottom: 0,
@@ -28,7 +30,7 @@ class BackgroundCard extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 CustomButtonWidget(icon: Icons.add, title: 'My List'),
                 PlayButton(),
                 CustomButtonWidget(icon: Icons.info, title: 'Info')

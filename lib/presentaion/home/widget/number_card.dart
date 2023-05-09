@@ -1,7 +1,9 @@
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
+import 'package:netflix_ui/api/api_uri.dart';
 import 'package:netflix_ui/core/colors/colors.dart';
 import 'package:netflix_ui/core/constant.dart';
+import 'package:netflix_ui/presentaion/splash.dart/screen_splash.dart';
 
 class NumberCard extends StatelessWidget {
   final int index;
@@ -13,7 +15,7 @@ class NumberCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 40,
               height: 150,
             ),
@@ -22,10 +24,10 @@ class NumberCard extends StatelessWidget {
               height: 250,
               decoration: BoxDecoration(
                 borderRadius: kRadius10,
-                image: const DecorationImage(
+                image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                      "https://static-koimoi.akamaized.net/wp-content/new-galleries/2015/12/airlift-movie-poster-4.jpg",
+                      baseUri + top10PageData!.results![index].posterPath!,
                     )),
               ),
             ),
@@ -36,7 +38,7 @@ class NumberCard extends StatelessWidget {
           left: 13,
           child: BorderedText(
               strokeWidth: 10,
-              strokeColor: KwhiteColor,
+              strokeColor: kWhiteColor,
               child: Text(
                 "${index + 1}",
                 style: const TextStyle(
